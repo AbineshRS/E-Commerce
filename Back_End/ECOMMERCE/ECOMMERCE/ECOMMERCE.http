@@ -1,0 +1,6 @@
+@ECOMMERCE_HostAddress = http://localhost:5125
+
+GET {{ECOMMERCE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
