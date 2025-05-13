@@ -26,7 +26,7 @@ function Login() {
             if (usertype == 'Buyer') {
                 navigate('/buyer');
             } else {
-                navigate('/');
+                navigate('/seller_home');
             }
         } catch (error) {
             alert('Invalid credentials');

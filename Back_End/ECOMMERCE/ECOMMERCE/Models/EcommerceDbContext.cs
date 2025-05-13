@@ -10,5 +10,6 @@ namespace ECOMMERCE.Models
         public DbSet<Login> Login { get; set;}
         public DbSet<Add> Add { get; set;}
         public DbSet<Seller_register> seller_Registers { get; set;}
+        public DbSet<AddProducts> AddProducts { get; set;}
     }
 }

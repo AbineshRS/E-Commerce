@@ -105,6 +105,18 @@
         }
       }
     },
+    "/Ecommerce/Buyer/getproduct": {
+      "get": {
+        "tags": [
+          "Buyer"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/Seller/Seller/add": {
       "post": {
         "tags": [
@@ -125,6 +137,239 @@
             "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/SellerDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Seller/Seller/addproduct": {
+      "post": {
+        "tags": [
+          "Seller"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Productname": {
+                    "type": "string"
+                  },
+                  "Productdescription": {
+                    "type": "string"
+                  },
+                  "Category": {
+                    "type": "string"
+                  },
+                  "Spesification": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "string"
+                  },
+                  "Picture": {
+                    "type": "string"
+                  },
+                  "Quantity": {
+                    "type": "string"
+                  },
+                  "profilePicture": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "UserId": {
+                  "style": "form"
+                },
+                "Productname": {
+                  "style": "form"
+                },
+                "Productdescription": {
+                  "style": "form"
+                },
+                "Category": {
+                  "style": "form"
+                },
+                "Spesification": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                },
+                "Picture": {
+                  "style": "form"
+                },
+                "Quantity": {
+                  "style": "form"
+                },
+                "profilePicture": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Seller/Seller/productlist/{id}": {
+      "get": {
+        "tags": [
+          "Seller"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Seller/Seller/viewdetails/{id}": {
+      "get": {
+        "tags": [
+          "Seller"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Seller/Seller/update/{id}": {
+      "put": {
+        "tags": [
+          "Seller"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UserId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Productname": {
+                    "type": "string"
+                  },
+                  "Productdescription": {
+                    "type": "string"
+                  },
+                  "Category": {
+                    "type": "string"
+                  },
+                  "Spesification": {
+                    "type": "string"
+                  },
+                  "Amount": {
+                    "type": "string"
+                  },
+                  "Picture": {
+                    "type": "string"
+                  },
+                  "Quantity": {
+                    "type": "string"
+                  },
+                  "formFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "UserId": {
+                  "style": "form"
+                },
+                "Productname": {
+                  "style": "form"
+                },
+                "Productdescription": {
+                  "style": "form"
+                },
+                "Category": {
+                  "style": "form"
+                },
+                "Spesification": {
+                  "style": "form"
+                },
+                "Amount": {
+                  "style": "form"
+                },
+                "Picture": {
+                  "style": "form"
+                },
+                "Quantity": {
+                  "style": "form"
+                },
+                "formFile": {
+                  "style": "form"
+                }
               }
             }
           }

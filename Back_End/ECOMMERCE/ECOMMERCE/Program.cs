@@ -1,6 +1,7 @@
 using ECOMMERCE.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -70,6 +71,19 @@ builder.Services.AddSwaggerGen(a =>
 });
 
 var app = builder.Build();
+
+var productsPath = Path.Combine(Directory.GetCurrentDirectory(), "Products");
+if (!Directory.Exists(productsPath))
+{
+    Directory.CreateDirectory(productsPath);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(productsPath),
+    RequestPath = "/Products"
+});
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

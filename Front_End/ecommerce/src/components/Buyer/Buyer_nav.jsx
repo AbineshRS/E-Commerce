@@ -21,7 +21,10 @@ function Buyer_nav() {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav ms-auto"> {/* Using ms-auto to push the nav items to the right */}
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <Link to='/buyer'  className="nav-link active" aria-current="page">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to='/buyer'  className="nav-link active" aria-current="page">cart</Link>
                             </li>
 
                             <li className="nav-item">

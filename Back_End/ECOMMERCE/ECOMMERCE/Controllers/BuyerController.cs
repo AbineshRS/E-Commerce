@@ -134,6 +134,12 @@ namespace ECOMMERCE.Controllers
             return Ok(buyerDetails);
             
         }
-
+        [HttpGet]
+        [Route("getproduct")]
+        public async Task<IActionResult> getdata()
+        {
+            var data= await _Ecommercecontext.AddProducts.ToListAsync();
+            return Ok(data);
+        }
     }
 }
