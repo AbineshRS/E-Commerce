@@ -11,6 +11,7 @@ function Buyer_home() {
 
     useEffect(() => {
         load();
+        lodimg();
     }, []);
 
     async function load() {
@@ -24,8 +25,18 @@ function Buyer_home() {
             setdetails(result.data);
         }
     }
+    const [imgdetails, setimagedetails] = useState([]);
+    async function lodimg() {
+        const resultimg = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getproductimage`)
+        setimagedetails(resultimg.data);
+    }
+   
+    const handleviewdetails = (detail)=>{
+        navigate('/buyer_buyproduct',{
+            state:{id:detail}
+        })
+    }
     
-
     return (
         <div>
             <div className="container my-4">
@@ -43,36 +54,37 @@ function Buyer_home() {
                     }
                 `}</style>
 
-                {/* Carousel */}
                 <div id="carouselExampleCaptions" className="carousel slide">
                     <div className="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        {imgdetails.map((_, index) => (
+                            <button
+                                key={index}
+                                type="button"
+                                data-bs-target="#carouselExampleCaptions"
+                                data-bs-slide-to={index}
+                                className={index === 0 ? "active" : ""}
+                                aria-current={index === 0 ? "true" : undefined}
+                                aria-label={`Slide ${index + 1}`}
+                            ></button>
+                        ))}
                     </div>
+
                     <div className="carousel-inner">
-                        <div className="carousel-item active">
-                            <img src={img1} className="d-block w-100 carousel-img" alt="First slide" />
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
+                        {imgdetails.map((imgdetail, index) => (
+                            <div className={`carousel-item ${index === 0 ? "active" : ""}`} key={index}>
+                                <img
+                                    src={`https://localhost:7135/${imgdetail.picture}`}
+                                    className="d-block w-100 carousel-img"
+                                    alt={`Slide ${index + 1}`}
+                                />
+                                <div className="carousel-caption d-none d-md-block">
+                                    <h5>{imgdetail.productname}</h5>
+                                    <p>{imgdetail.productdescription}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={img2} className="d-block w-100 carousel-img" alt="Second slide" />
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                        </div>
-                        <div className="carousel-item">
-                            <img src={img3} className="d-block w-100 carousel-img" alt="Third slide" />
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
+
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                         <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Previous</span>
@@ -83,17 +95,18 @@ function Buyer_home() {
                     </button>
                 </div>
 
+
                 {/* Product Cards */}
                 <div className="row mt-5">
                     {details.length > 0 ? (
                         details.map((detail) => (
-                            <div className="col-12 col-md-4" key={detail.serialNo}> {/* Use a unique identifier from the data */}
+                            <div className="col-12 col-md-4 mt-3" key={detail.serialNo}> {/* Use a unique identifier from the data */}
                                 <div className="card h-100">
-                                <img src={`https://localhost:7135/${detail.picture}`} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} alt="..." />
-                                <div className="card-body d-flex flex-column">
+                                    <img src={`https://localhost:7135/${detail.picture}`} className="card-img-top" style={{ height: '200px', objectFit: 'cover' }} alt="..." />
+                                    <div className="card-body d-flex flex-column shadow">
                                         <h5 className="card-title">{detail.productname}</h5>
                                         <p className="card-text flex-grow-1">{detail.productdescription}</p>
-                                        <button className="btn btn-primary mt-auto">View Product</button>
+                                        <button className="btn btn-primary mt-auto" onClick={()=>handleviewdetails(detail.id)}>View Product</button>
                                     </div>
                                 </div>
                             </div>

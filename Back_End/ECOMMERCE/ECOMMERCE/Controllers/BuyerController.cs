@@ -1,11 +1,15 @@
-﻿using ECOMMERCE.Models;
+﻿using ECOMMERCE.DTO;
+using ECOMMERCE.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
 
@@ -67,7 +71,10 @@ namespace ECOMMERCE.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(string username, string password)
         {
-            var details = await _Ecommercecontext.Login.FirstOrDefaultAsync(s => s.Username == username && s.Password == password);
+            var details = await _Ecommercecontext.Login
+                .FirstOrDefaultAsync(s =>
+                    EF.Functions.Collate(s.Username, "SQL_Latin1_General_CP1_CS_AS") == username &&
+                    EF.Functions.Collate(s.Password, "SQL_Latin1_General_CP1_CS_AS") == password);
 
             if (details == null)
             {
@@ -82,7 +89,7 @@ namespace ECOMMERCE.Controllers
                 var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, details.Username),
-                        new Claim("ID", details.Id.ToString()),
+                        new Claim("ID", details.UserId.ToString()),
                         new Claim("usertype",details.Usertype)
                     };
 
@@ -103,7 +110,7 @@ namespace ECOMMERCE.Controllers
         [HttpPut]
         [Authorize]
         [Route("update")]
-        public async Task<IActionResult> Update(int id,BuyerDetails buyerDetails)
+        public async Task<IActionResult> Update(int id, BuyerDetails buyerDetails)
         {
             var details = await _Ecommercecontext.Buyer_register.FindAsync(id);
             if (details == null)
@@ -132,14 +139,154 @@ namespace ECOMMERCE.Controllers
             }
             await _Ecommercecontext.SaveChangesAsync();
             return Ok(buyerDetails);
-            
+
         }
         [HttpGet]
         [Route("getproduct")]
         public async Task<IActionResult> getdata()
         {
-            var data= await _Ecommercecontext.AddProducts.ToListAsync();
+            var data = await _Ecommercecontext.AddProducts.ToListAsync();
             return Ok(data);
+        }
+        [HttpGet]
+        [Route("getproductimage")]
+        public async Task<IActionResult> getimg()
+        {
+            var data = await _Ecommercecontext.AddProducts.OrderByDescending(a => a.Id).Take(3).Select(a => new { a.Id, a.Category, a.Picture, a.Productname, a.Productdescription }).ToListAsync();
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("getdetails/{id}")]
+        public async Task<IActionResult> getdetails(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("Not found");
+            }
+
+            var data = await _Ecommercecontext.AddProducts.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("userid/{id}")]
+        public async Task<IActionResult> getdata(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("not found");
+            }
+            var data = await _Ecommercecontext.Buyer_register.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(data);
+        }
+        [HttpPost]
+        [Route("buyerbuyed")]
+        public async Task<IActionResult> buyerbuyed([FromBody] Buyer_buyed_product buyer_Buyed_Product)
+        {
+            if (buyer_Buyed_Product == null)
+            {
+                return BadRequest("Please Enter data");
+            }
+            var data = new Buyer_buyed_product
+            {
+                UserId = buyer_Buyed_Product.UserId,
+                ProductId = buyer_Buyed_Product.ProductId,
+                SellerId = buyer_Buyed_Product.SellerId,
+                Username = buyer_Buyed_Product.Username,
+                Email = buyer_Buyed_Product.Email,
+
+            };
+            _Ecommercecontext.Buyer_Buyed_Products.Add(data);
+            await _Ecommercecontext.SaveChangesAsync();
+
+            foreach (var product in buyer_Buyed_Product.product_Buyed_Details)
+            {
+                var data2 = new Product_buyed_details
+                {
+                    ParentId = data.Id,
+                    Productname = product.Productname,
+                    Productdescription = product.Productdescription,
+                    Quantity = product.Quantity,
+                    Amount = product.Amount,
+                    Address = product.Address,
+                };
+                _Ecommercecontext.Product_Buyed_Details.Add(data2);
+            }
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(data);
+        }
+        [HttpPut]
+        [Route("update/{id}")]
+        public async Task<IActionResult> Updatequnatity(int id, [FromBody] AddProducts addProducts)
+        {
+            if (id == null)
+            {
+                return BadRequest("not found");
+            }
+            var data = await _Ecommercecontext.AddProducts.FindAsync(id);
+            if (data == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                data.Quantity -= addProducts.Quantity;
+                await _Ecommercecontext.SaveChangesAsync();
+            }
+            return Ok(data.Quantity);
+        }
+        [HttpGet]
+        [Route("product/{id}")]
+        public async Task<IActionResult> productdeatils(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("id not found");
+            }
+            var data = await (from buy in _Ecommercecontext.Buyer_Buyed_Products
+                              join prod in _Ecommercecontext.AddProducts
+                              on buy.ProductId equals prod.Id
+                              where buy.SellerId == id
+                              select prod).Distinct().ToListAsync();
+            if (data == null|| data.Count==0)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("getdata/{id}")]
+        public async Task<IActionResult> getproduct(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("Not id found");
+            }
+            var userdeatils = await (from buy in _Ecommercecontext.Buyer_Buyed_Products
+                                     join prod in _Ecommercecontext.Product_Buyed_Details
+                                     on buy.Id equals prod.ParentId
+                                     where buy.ProductId == id
+                                     select new
+                                     {
+                                         buy.Id,
+                                         buy.Username,
+                                         buy.Email,
+                                         prod.Amount,
+                                         prod.Quantity,
+                                         prod.Address
+                                     }).Distinct().OrderByDescending(a=>a.Id).ToListAsync();
+            if(userdeatils==null || userdeatils.Count == 0)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(userdeatils);
         }
     }
 }

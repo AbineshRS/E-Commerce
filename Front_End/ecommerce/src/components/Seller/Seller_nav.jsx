@@ -30,7 +30,7 @@ function Seller_nav() {
                             <Link to="/view_product" className="nav-link active" aria-current="page">view Products</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">List of Products Brought</a>
+                            <Link  to="/Buyerdeatils" className="nav-link active">List of Products Brought</Link>
                         </li>
 
                         <li className="nav-item">

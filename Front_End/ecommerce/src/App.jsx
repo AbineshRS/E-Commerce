@@ -17,6 +17,9 @@ import AddProduct from './components/Seller/AddProduct'
 import Seller_viewproduct from './components/Seller/Seller_viewproduct'
 import Buyer_productslist from './components/Buyer/Buyer_productslist'
 import Seller_View_Detailproduct from './components/Seller/Seller_View_Detailproduct'
+import Buyer_buying_detailed from './components/Buyer/Buyer_buying_detailed'
+import Seller_view_brougheted_Buyers from './components/Seller/Seller_view_brougheted_Buyers'
+import Seller_view_detailed_buyed_sellers from './components/Seller/Seller_view_detailed_buyed_sellers'
 
 function App() {
 
@@ -29,12 +32,15 @@ function App() {
           {/* Buyer */}
           <Route path="/buyer_reg" element={<><Nav/>,<Register/></>}/>
           <Route path="/buyer" element={<><Buyer_nav/>,<Buyer_home/></>}/>
+          <Route path="/buyer_buyproduct" element={<><Buyer_nav/>,<Buyer_buying_detailed/></>}/>
           {/* Sellers */}
           <Route path='/seller_reg' element={<><Nav/>,<Registers/></>}/>
           <Route path='/seller_home' element={<><Seller_nav/>,<Seller_home/></>}/>
           <Route path='/addproducts' element={<><Seller_nav/>,<AddProduct/></>}/>
           <Route path='/view_product' element={<><Seller_nav/>,<Seller_viewproduct/></>} />
           <Route path='/viewdetailed' element={<><Seller_nav/>,<Seller_View_Detailproduct/></>} />
+          <Route path='/Buyerdeatils' element={<><Seller_nav/>,<Seller_view_brougheted_Buyers/></>} />
+          <Route path='/detail' element={<><Seller_nav/>,<Seller_view_detailed_buyed_sellers/></>} />
           <Route path='/location' element={<><Nav/>,<LocationSelector/></>}/>
         </Routes>
       </BrowserRouter>

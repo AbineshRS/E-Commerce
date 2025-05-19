@@ -19,8 +19,17 @@ function Login() {
             }
             sessionStorage.setItem('token', token);
             const decode = jwtDecode(token);
+            const currentTime = Date.now() / 1000;
             const id = decode.ID;
             sessionStorage.setItem('ID', id);
+            if (decode.exp && decode.exp < currentTime) {
+                // Token is expired
+                alert('Session expired. Please login again.');
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('ID');
+                return;
+            }
+
             const usertype = decode.usertype;
             alert('success');
             if (usertype == 'Buyer') {

@@ -10,6 +10,6 @@
         public string Spesification { get; set; }
         public string Amount { get; set; }
         public string? Picture { get; set; }
-        public string Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }
