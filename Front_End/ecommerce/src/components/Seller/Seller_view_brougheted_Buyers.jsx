@@ -70,7 +70,6 @@ function Seller_view_brougheted_Buyers() {
                         </tr>
                     )}
                 </tbody>
-
             </table>
         </div>
     )
