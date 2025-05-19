@@ -21,8 +21,20 @@ function Buyer_home() {
             navigate('/login');
             return;
         } else {
-            const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getproduct`);
-            setdetails(result.data);
+            try {
+                const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getproduct`);
+                setdetails(result.data);
+            } catch (error) {
+                if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                    // Token is invalid or expired
+                    sessionStorage.clear();
+                    alert("Session expired. Please login again.");
+                    navigate('/login');
+                } else {
+                    console.error("Error fetching data", error);
+                }
+            }
+
         }
     }
     const [imgdetails, setimagedetails] = useState([]);
@@ -30,13 +42,13 @@ function Buyer_home() {
         const resultimg = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getproductimage`)
         setimagedetails(resultimg.data);
     }
-   
-    const handleviewdetails = (detail)=>{
-        navigate('/buyer_buyproduct',{
-            state:{id:detail}
+
+    const handleviewdetails = (detail) => {
+        navigate('/buyer_buyproduct', {
+            state: { id: detail }
         })
     }
-    
+
     return (
         <div>
             <div className="container my-4">
@@ -106,7 +118,7 @@ function Buyer_home() {
                                     <div className="card-body d-flex flex-column shadow">
                                         <h5 className="card-title">{detail.productname}</h5>
                                         <p className="card-text flex-grow-1">{detail.productdescription}</p>
-                                        <button className="btn btn-primary mt-auto" onClick={()=>handleviewdetails(detail.id)}>View Product</button>
+                                        <button className="btn btn-primary mt-auto" onClick={() => handleviewdetails(detail.id)}>View Product</button>
                                     </div>
                                 </div>
                             </div>

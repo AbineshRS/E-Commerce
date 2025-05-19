@@ -90,6 +90,7 @@ namespace ECOMMERCE.Controllers
                     {
                         new Claim(ClaimTypes.Name, details.Username),
                         new Claim("ID", details.UserId.ToString()),
+                         new Claim(ClaimTypes.Role, details.Usertype),
                         new Claim("usertype",details.Usertype)
                     };
 
@@ -243,7 +244,7 @@ namespace ECOMMERCE.Controllers
             return Ok(data.Quantity);
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Seller")]
         [Route("product/{id}")]
         public async Task<IActionResult> productdeatils(int id)
         {

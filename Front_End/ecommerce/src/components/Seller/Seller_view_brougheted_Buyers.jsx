@@ -17,10 +17,22 @@ function Seller_view_brougheted_Buyers() {
             alert('Login');
             return;
         }
-        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/product/${id}`, {
-            headers: { 'Authorization': `Bearer ${token}` } 
-        })
-        setdetail(result.data);
+        try {
+            const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/product/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            setdetail(result.data);
+        } catch (error) {
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                // Token is invalid or expired
+                sessionStorage.clear();
+                alert("Session expired. Please login again.");
+                navigate('/login');
+            } else {
+                console.error("Error fetching data", error);
+            }
+        }
+
     }
     return (
         <div>
@@ -47,7 +59,7 @@ function Seller_view_brougheted_Buyers() {
                                     <td>{detail.category}</td>
                                     <td>{detail.amount}</td>
                                     <td>
-                                        <Link to="/detail" state={{ id: detail.id }}>View</Link>
+                                        <Link to="/detail" state={{ id: detail.id }} className='btn btn-primary'>View</Link>
                                     </td>
                                 </tr>
                             ));

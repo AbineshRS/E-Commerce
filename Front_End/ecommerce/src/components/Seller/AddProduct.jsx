@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function AddProduct() {
     const id = sessionStorage.getItem('ID');
-    const token=sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const categories = [
         "Mobile Phones", "Laptops", "Headphones", "Men’s Clothing", "Women’s Clothing",
         "Shoes", "Watches", "Furniture", "Home Decor", "Kitchen Appliances",
@@ -51,7 +51,8 @@ function AddProduct() {
         try {
             await axios.post(`https://localhost:7135/Seller/Seller/addproduct`, formData,
                 {
-                    headers:{ 'Authorization':`Bearer ${token}`
+                    headers: {
+                        'Authorization': `Bearer ${token}`
 
                     }
                 }
@@ -65,15 +66,21 @@ function AddProduct() {
                 Category: '',
                 Spesification: '',
                 Amount: '',
-                Quantity:'',
+                Quantity: '',
                 Picture: null
             });
 
             document.querySelector('input[name="Picture"]').value = '';
 
         } catch (error) {
-            console.error('Error response:', error.response);
-            alert('Failed to add product');
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                // Token is invalid or expired
+                sessionStorage.clear();
+                alert("Session expired. Please login again.");
+                navigate('/login');
+            } else {
+                console.error("Error fetching data", error);
+            }
         }
     };
 
@@ -93,9 +100,9 @@ function AddProduct() {
                     </div>
                     <div className='col-12 col-md-6'>
                         <label className="form-label">Quantity</label>
-                        <input type="text" name="Quantity" id="" className='form-control' value={addProducts.Quantity} onChange={handleChange}/>
+                        <input type="text" name="Quantity" id="" className='form-control' value={addProducts.Quantity} onChange={handleChange} />
                     </div>
-                   
+
 
                     <div className="col-12 col-md-6">
                         <label className="form-label">Category</label>
@@ -121,7 +128,7 @@ function AddProduct() {
                         <label className="form-label">Image</label>
                         <input type="file" name="Picture" className="form-control" accept='image/*' onChange={handleFileChange} />
                     </div>
-                     <div className="col-12 col-md-12">
+                    <div className="col-12 col-md-12">
                         <label className="form-label">Product Description</label>
                         <textarea type="text" name="Productdescription" className="form-control" value={addProducts.Productdescription} onChange={handleChange} />
                     </div>

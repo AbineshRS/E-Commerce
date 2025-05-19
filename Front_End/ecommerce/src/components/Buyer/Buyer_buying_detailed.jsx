@@ -48,8 +48,14 @@ function Buyer_buying_detailed() {
       const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getdetails/${id}`);
       setDetails(result.data);
     } catch (error) {
-      console.error("Error loading product details:", error);
-      alert("Failed to load product details.");
+      if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+        // Token is invalid or expired
+        sessionStorage.clear();
+        alert("Session expired. Please login again.");
+        navigate('/login');
+      } else {
+        console.error("Error fetching data", error);
+      }
     }
   }
 

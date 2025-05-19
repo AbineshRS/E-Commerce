@@ -16,10 +16,21 @@ function Seller_viewproduct() {
             navigate('/login');
             return;
         }
-        const result = await axios.get(`https://localhost:7135/Seller/Seller/productlist/${id}`, {
-            headers: { 'Authorization': `Bearer ${token}` }
-        })
-        sedetails(result.data);
+        try {
+            const result = await axios.get(`https://localhost:7135/Seller/Seller/productlist/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            sedetails(result.data);
+        } catch (error) {
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                sessionStorage.clear();
+                alert("Session expired. Please login again.");
+                navigate('/login');
+            } else {
+                console.error("Error fetching data", error);
+            }
+        }
+
     }
     const handleviewDetails = (productdetails) => {
         navigate('/viewdetailed', {

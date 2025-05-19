@@ -25,7 +25,14 @@ function Seller_View_Detailproduct() {
             });
             setdetails(result.data);
         } catch (error) {
-            console.error('Error fetching product details:', error);
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                // Token is invalid or expired
+                sessionStorage.clear();
+                alert("Session expired. Please login again.");
+                navigate('/login');
+            } else {
+                console.error("Error fetching data", error);
+            }
         }
     }
     //Update code

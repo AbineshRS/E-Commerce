@@ -12,16 +12,30 @@ function Seller_view_detailed_buyed_sellers() {
     }, [id])
     async function load() {
         const token = sessionStorage.getItem('token');
-        if(!token){
+        if (!token) {
             navigate('/login');
             alert("Login");
             return;
         }
-        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getdata/${id}`,{
-            headers:{ 'Authorization': `Bearer ${token}`}
-        })
-        setdeatils(result.data);
+        try {
+            const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getdata/${id}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            })
+            setdeatils(result.data);
+        } catch (error) {
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                // Token is invalid or expired
+                sessionStorage.clear();
+                alert("Session expired. Please login again.");
+                navigate('/login');
+            } else {
+                console.error("Error fetching data", error);
+            }
+        }
+
     }
+    const totalAmount = detail.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0);
+
     return (
         <div>
             <table className="table">
@@ -40,7 +54,7 @@ function Seller_view_detailed_buyed_sellers() {
                         (() => {
                             let sino = 1;
                             return detail.map((detail) => (
-                                <tr key={detail.username + detail.email + detail.amount+detail.quantity+detail.address}>
+                                <tr key={detail.username + detail.email + detail.amount + detail.quantity + detail.address}>
                                     <td>{sino++}</td>
                                     <td>{detail.username}</td>
                                     <td>{detail.email}</td>
@@ -58,6 +72,7 @@ function Seller_view_detailed_buyed_sellers() {
                 </tbody>
 
             </table>
+            <p className='text-center fs-3 fw-bolder'>Total: {totalAmount}</p>
         </div>
     )
 }
