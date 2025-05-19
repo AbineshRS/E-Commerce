@@ -243,6 +243,7 @@ namespace ECOMMERCE.Controllers
             return Ok(data.Quantity);
         }
         [HttpGet]
+        [Authorize]
         [Route("product/{id}")]
         public async Task<IActionResult> productdeatils(int id)
         {
@@ -262,6 +263,7 @@ namespace ECOMMERCE.Controllers
             return Ok(data);
         }
         [HttpGet]
+        [Authorize]
         [Route("getdata/{id}")]
         public async Task<IActionResult> getproduct(int id)
         {

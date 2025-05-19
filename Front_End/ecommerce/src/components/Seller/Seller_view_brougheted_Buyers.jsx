@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Seller_view_brougheted_Buyers() {
+    const navigate = useNavigate();
     const id = sessionStorage.getItem('ID');
     const [detail, setdetail] = useState([]);
     useEffect(() => {
@@ -10,7 +11,15 @@ function Seller_view_brougheted_Buyers() {
     }, [])
     async function load() {
         const id = sessionStorage.getItem('ID');
-        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/product/${id}`)
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            alert('Login');
+            return;
+        }
+        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/product/${id}`, {
+            headers: { 'Authorization': `Bearer ${token}` } 
+        })
         setdetail(result.data);
     }
     return (
@@ -38,7 +47,7 @@ function Seller_view_brougheted_Buyers() {
                                     <td>{detail.category}</td>
                                     <td>{detail.amount}</td>
                                     <td>
-                                      <Link to="/detail" state={{id:detail.id}}>View</Link>
+                                        <Link to="/detail" state={{ id: detail.id }}>View</Link>
                                     </td>
                                 </tr>
                             ));

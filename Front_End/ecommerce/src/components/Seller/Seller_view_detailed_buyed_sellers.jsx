@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function Seller_view_detailed_buyed_sellers() {
+    const navigate = useNavigate();
     const location = useLocation();
     const { id } = location.state || {};
     const [detail, setdeatils] = useState([]);
@@ -10,7 +11,15 @@ function Seller_view_detailed_buyed_sellers() {
         load();
     }, [id])
     async function load() {
-        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getdata/${id}`)
+        const token = sessionStorage.getItem('token');
+        if(!token){
+            navigate('/login');
+            alert("Login");
+            return;
+        }
+        const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/getdata/${id}`,{
+            headers:{ 'Authorization': `Bearer ${token}`}
+        })
         setdeatils(result.data);
     }
     return (
