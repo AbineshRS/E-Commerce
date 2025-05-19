@@ -2,6 +2,8 @@ import React from 'react'
 import img from '../../assets/online-shop.png'
 import { Link, useNavigate } from 'react-router-dom'
 
+
+
 function Seller_nav() {
     const navigate = useNavigate();
     const hnadleclick = () => {
@@ -30,7 +32,7 @@ function Seller_nav() {
                             <Link to="/view_product" className="nav-link active" aria-current="page">view Products</Link>
                         </li>
                         <li className="nav-item">
-                            <Link  to="/Buyerdeatils" className="nav-link active">List of Products Brought</Link>
+                            <Link to="/Buyerdeatils" className="nav-link active">List of Products Brought</Link>
                         </li>
 
                         <li className="nav-item">
@@ -39,6 +41,8 @@ function Seller_nav() {
                         <li className="nav-item">
                             <a href="#" className="nav-link" onClick={hnadleclick}>Logout</a>
                         </li>
+                        
+
                     </ul>
                 </div>
             </div>

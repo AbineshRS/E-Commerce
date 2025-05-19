@@ -1,13 +1,15 @@
 import React from 'react';
 import img from '../assets/online-shop.png'
 import { Link } from 'react-router-dom';
+import { useTheme } from '../components/MainLayout.jsx';
 function Nav() {
+     const { darkMode, toggleTheme } = useTheme();
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top mt-2">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#">
-                    <img src={img} alt="Logo" width="30" height="24" className="d-inline-block align-text-top"/>
-                        E-Commerce
+                    <img src={img} alt="Logo" width="30" height="24" className="d-inline-block align-text-top" />
+                    E-Commerce
                 </a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -19,7 +21,7 @@ function Nav() {
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                               Register
+                                Register
                             </a>
                             <ul className="dropdown-menu">
                                 <li><Link to="/buyer_reg" className="dropdown-item">Buyer</Link></li>
@@ -31,6 +33,11 @@ function Nav() {
                         </li>
                         <li className="nav-item">
                             <Link to="/login" className="nav-link  me-5">Login</Link>
+                        </li>
+                        <li className="nav-item">
+                            <button className="btn btn-outline-secondary" onClick={toggleTheme}>
+                                {darkMode ? '☀ Light' : '🌙 Dark'}
+                            </button>
                         </li>
                     </ul>
                 </div>

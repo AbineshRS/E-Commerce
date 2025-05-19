@@ -87,21 +87,28 @@ function Buyer_home() {
                 }
             `}</style>
 
-            {/* Search */}
-            <div className="row mb-4">
-                <div className="col-md-3 ms-auto">
+            <div className="row mb-4 justify-content-end">
+                <div className="col-md-6">
+                    <label htmlFor="exampleDataList" className="form-label">Search Product</label>
                     <input
-                        type="text"
                         className="form-control"
-                        placeholder="Search products..."
+                        list="datalistOptions"
+                        id="exampleDataList"
+                        placeholder="Type to search..."
                         value={searchTerm}
                         onChange={(e) => {
                             setSearchTerm(e.target.value);
-                            setCurrentPage(1); // reset to first page when search changes
+                            setCurrentPage(1);
                         }}
                     />
+                    <datalist id="datalistOptions">
+                        {details.slice(-5).map((item, index) => (
+                            <option key={index} value={item.productname} />
+                        ))}
+                    </datalist>
                 </div>
             </div>
+
 
 
 

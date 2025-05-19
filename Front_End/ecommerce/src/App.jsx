@@ -20,11 +20,14 @@ import Seller_View_Detailproduct from './components/Seller/Seller_View_Detailpro
 import Buyer_buying_detailed from './components/Buyer/Buyer_buying_detailed'
 import Seller_view_brougheted_Buyers from './components/Seller/Seller_view_brougheted_Buyers'
 import Seller_view_detailed_buyed_sellers from './components/Seller/Seller_view_detailed_buyed_sellers'
+import Dark from './components/Dark'
+import MainLayout from './components/MainLayout'
 
 function App() {
 
   return (
     <div>
+      <MainLayout>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<><Nav /><Home /></>}/>
@@ -42,8 +45,10 @@ function App() {
           <Route path='/Buyerdeatils' element={<><Seller_nav/>,<Seller_view_brougheted_Buyers/></>} />
           <Route path='/detail' element={<><Seller_nav/>,<Seller_view_detailed_buyed_sellers/></>} />
           <Route path='/location' element={<><Nav/>,<LocationSelector/></>}/>
+          <Route path='/dark' element={<><Nav/>,<Dark/></>}/>
         </Routes>
       </BrowserRouter>
+      </MainLayout>
     </div>
   )
 }
