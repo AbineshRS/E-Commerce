@@ -65,7 +65,47 @@ namespace ECOMMERCE.Controllers
 
             return Ok(new { message = "Buyer registered successfully", buyerId = register.Id });
         }
-
+        [HttpGet]
+        [Route("userdetails/{id}")]
+        public async Task<IActionResult> userdeatils(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("not fonud");
+            }
+            var data = await _Ecommercecontext.Buyer_register.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(data);
+        }
+        [HttpPut]
+        [Route("Buyerupdate/{id}")]
+        public async Task<IActionResult> Update(int id,Buyer_register buyer_Register)
+        {
+            if (id == null)
+            {
+                return BadRequest("Not found");
+            }
+            var data = await _Ecommercecontext.Buyer_register.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("Not found");
+            }
+            else
+            {
+                data.FirstName = buyer_Register.FirstName;
+                data.LastName = buyer_Register.LastName;
+                data.DOB = buyer_Register.DOB;
+                data.Phonenumber = buyer_Register.Phonenumber;
+                data.Email = buyer_Register.Email;
+                data.Gender = buyer_Register.Gender;
+                data.Address = buyer_Register.Address;
+            }
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(data);
+        }
         [Route("login")]
         [HttpGet]
         [AllowAnonymous]

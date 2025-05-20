@@ -33,6 +33,27 @@
   },
   {
     "ContainingType": "ECOMMERCE.Controllers.BuyerController",
+    "Method": "Update",
+    "RelativePath": "Ecommerce/Buyer/Buyerupdate/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "buyer_Register",
+        "Type": "ECOMMERCE.Models.Buyer_register",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECOMMERCE.Controllers.BuyerController",
     "Method": "getproduct",
     "RelativePath": "Ecommerce/Buyer/getdata/{id}",
     "HttpMethod": "GET",
@@ -157,6 +178,22 @@
       {
         "Name": "addProducts",
         "Type": "ECOMMERCE.Models.AddProducts",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECOMMERCE.Controllers.BuyerController",
+    "Method": "userdeatils",
+    "RelativePath": "Ecommerce/Buyer/userdetails/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

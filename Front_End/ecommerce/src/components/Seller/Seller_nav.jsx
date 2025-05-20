@@ -21,7 +21,7 @@ function Seller_nav() {
         const result = await axios.get(`https://localhost:7135/Seller/Seller/userdeatils/${id}`);
         setDetails(result.data);
     }
-   
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top mt-2">
             <div className="container-fluid">
@@ -51,12 +51,12 @@ function Seller_nav() {
                             <a className="nav-link" href="#">Pricing</a>
                         </li>
                         <div className="btn-group me-5">
-                            <a className="text-decoration-none dropdown-toggle text-black mt-2 me-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a className="text-decoration-none dropdown-toggle text-black  me-5 nav-link active" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {details.ownername}
                             </a>
                             <ul className="dropdown-menu">
                                 <li>
-                                    <Link to="/update" state={{id:details.id}} className="dropdown-item">Settings</Link>
+                                    <Link to="/update" state={{ id: details.id }} className="dropdown-item">Settings</Link>
                                 </li>
 
                                 <li><a className="dropdown-item" href="#" onClick={hnadleclick}>Logout</a></li>

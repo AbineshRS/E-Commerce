@@ -23,6 +23,7 @@ import Seller_view_detailed_buyed_sellers from './components/Seller/Seller_view_
 import Dark from './components/Dark'
 import MainLayout from './components/MainLayout'
 import Update_profile from './components/Seller/Update_profile'
+import Update_profiles from './components/Buyer/Update_profile'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/buyer_reg" element={<><Nav/>,<Register/></>}/>
           <Route path="/buyer" element={<><Buyer_nav/>,<Buyer_home/></>}/>
           <Route path="/buyer_buyproduct" element={<><Buyer_nav/>,<Buyer_buying_detailed/></>}/>
+          <Route path="/profile" element={<><Buyer_nav/>,<Update_profiles/></>}/>
           {/* Sellers */}
           <Route path='/seller_reg' element={<><Nav/>,<Registers/></>}/>
           <Route path='/update' element={<><Seller_nav/>,<Update_profile/></>}/>
