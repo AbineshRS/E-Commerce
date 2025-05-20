@@ -1,0 +1,77 @@
+/* Override Bootstrap components for dark mode when body has bg-dark */
+
+body.bg-dark input.form-control,
+body.bg-dark textarea.form-control,
+body.bg-dark select.form-select {
+  background-color: #343a40 !important;
+  color: white !important;
+  border-color: #6c757d !important;
+}
+
+body.bg-dark input.form-control::placeholder,
+body.bg-dark textarea.form-control::placeholder {
+  color: #adb5bd !important;
+}
+
+body.bg-dark .card {
+  background-color: #212529 !important;
+  color: white !important;
+}
+
+body.bg-dark .btn-outline-secondary,
+body.bg-dark .btn-outline-dark {
+  color: white !important;
+  border-color: white !important;
+}
+
+body.bg-dark .btn-outline-secondary:hover,
+body.bg-dark .btn-outline-dark:hover {
+  background-color: white !important;
+  color: #212529 !important;
+}
+/* Dark mode table styling: black background and white text */
+body.bg-dark table {
+  background-color: #000000 !important; /* pure black background */
+  color: white !important;              /* white text */
+  border-color: #333333 !important;     /* dark gray border */
+}
+
+body.bg-dark table th,
+body.bg-dark table td {
+  border: 1px solid #333333 !important; /* cell borders */
+  color: white !important;               /* white text in cells */
+  background-color: #000000 !important; /* black cell background */
+}
+
+body.bg-dark table thead th {
+  background-color: #111111 !important; /* slightly lighter black for header */
+  color: white !important;
+}
+
+body.bg-dark table tbody tr:hover {
+  background-color: #222222 !important; /* dark gray hover effect */
+}
+/* Dark mode navbar styling */
+body.bg-dark .navbar {
+  background-color: #000000 !important; /* pure black background */
+}
+
+body.bg-dark .navbar .navbar-brand,
+body.bg-dark .navbar .nav-link,
+body.bg-dark .navbar .navbar-toggler-icon {
+  color: white !important; /* white text for brand and nav links */
+}
+
+body.bg-dark .navbar .nav-link.active,
+body.bg-dark .navbar .nav-link:hover,
+body.bg-dark .navbar .nav-link:focus {
+  color: #ddd !important; /* lighter white on hover/focus/active */
+}
+
+body.bg-dark .navbar-toggler {
+  border-color: white !important; /* white border on toggle button */
+}
+
+body.bg-dark .navbar-toggler-icon {
+  filter: invert(1); /* invert icon colors to show white toggler icon */
+}
