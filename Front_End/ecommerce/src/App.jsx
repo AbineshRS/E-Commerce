@@ -22,6 +22,7 @@ import Seller_view_brougheted_Buyers from './components/Seller/Seller_view_broug
 import Seller_view_detailed_buyed_sellers from './components/Seller/Seller_view_detailed_buyed_sellers'
 import Dark from './components/Dark'
 import MainLayout from './components/MainLayout'
+import Update_profile from './components/Seller/Update_profile'
 
 function App() {
 
@@ -38,12 +39,15 @@ function App() {
           <Route path="/buyer_buyproduct" element={<><Buyer_nav/>,<Buyer_buying_detailed/></>}/>
           {/* Sellers */}
           <Route path='/seller_reg' element={<><Nav/>,<Registers/></>}/>
+          <Route path='/update' element={<><Seller_nav/>,<Update_profile/></>}/>
           <Route path='/seller_home' element={<><Seller_nav/>,<Seller_home/></>}/>
           <Route path='/addproducts' element={<><Seller_nav/>,<AddProduct/></>}/>
           <Route path='/view_product' element={<><Seller_nav/>,<Seller_viewproduct/></>} />
           <Route path='/viewdetailed' element={<><Seller_nav/>,<Seller_View_Detailproduct/></>} />
           <Route path='/Buyerdeatils' element={<><Seller_nav/>,<Seller_view_brougheted_Buyers/></>} />
           <Route path='/detail' element={<><Seller_nav/>,<Seller_view_detailed_buyed_sellers/></>} />
+
+          
           <Route path='/location' element={<><Nav/>,<LocationSelector/></>}/>
           <Route path='/dark' element={<><Nav/>,<Dark/></>}/>
         </Routes>

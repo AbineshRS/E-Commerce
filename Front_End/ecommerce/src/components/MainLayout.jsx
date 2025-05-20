@@ -15,9 +15,11 @@ export default function MainLayout({ children }) {
     if (darkMode) {
       document.body.classList.add('bg-dark', 'text-white');
       document.body.classList.remove('bg-light', 'text-dark');
+      document.body.setAttribute('data-bs-theme', 'dark');  // Enable Bootstrap dark mode styling
     } else {
       document.body.classList.add('bg-light', 'text-dark');
       document.body.classList.remove('bg-dark', 'text-white');
+      document.body.removeAttribute('data-bs-theme');  // Disable Bootstrap dark mode styling
     }
   }, [darkMode]);
 

@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import img from '../../assets/online-shop.png'
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 
 
 function Seller_nav() {
+    const [details, setDetails] = useState({});
+
     const navigate = useNavigate();
     const hnadleclick = () => {
         sessionStorage.clear();
         navigate('/login');
+    };
+    useEffect(() => {
+        load();
+    }, [])
+    async function load() {
+        const id = sessionStorage.getItem('ID');
+        const result = await axios.get(`https://localhost:7135/Seller/Seller/userdeatils/${id}`);
+        setDetails(result.data);
     }
+   
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top mt-2">
             <div className="container-fluid">
@@ -38,11 +50,18 @@ function Seller_nav() {
                         <li className="nav-item">
                             <a className="nav-link" href="#">Pricing</a>
                         </li>
-                        <li className="nav-item">
-                            <a href="#" className="nav-link" onClick={hnadleclick}>Logout</a>
-                        </li>
-                        
+                        <div className="btn-group me-5">
+                            <a className="text-decoration-none dropdown-toggle text-black mt-2 me-5" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {details.ownername}
+                            </a>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <Link to="/update" state={{id:details.id}} className="dropdown-item">Settings</Link>
+                                </li>
 
+                                <li><a className="dropdown-item" href="#" onClick={hnadleclick}>Logout</a></li>
+                            </ul>
+                        </div>
                     </ul>
                 </div>
             </div>

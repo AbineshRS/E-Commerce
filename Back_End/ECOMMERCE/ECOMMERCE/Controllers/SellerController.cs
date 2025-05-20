@@ -51,6 +51,47 @@ namespace ECOMMERCE.Controllers
             await _Ecommercecontext.SaveChangesAsync();
             return Ok(sellerDetails);
         }
+        [HttpGet]
+        [Route("userdeatils/{id}")]
+        public async Task<IActionResult> getuserdeatils(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("not found");
+            }
+            var data = await _Ecommercecontext.seller_Registers.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("No data found");
+            }
+            return Ok(data);
+        }
+        [HttpPut]
+        [Route("updateprofile/{id}")]
+        public async Task<IActionResult> update(int id,[FromBody]Seller_register seller_Register)
+        {
+            if (id == null)
+            {
+                return BadRequest("not found");
+            }
+            var data = await _Ecommercecontext.seller_Registers.Where(a => a.Id == id).FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return BadRequest("not found");
+            }
+            else
+            {
+                data.Companyname = seller_Register.Companyname;
+                data.License = seller_Register.License;
+                data.Companyaddress = seller_Register.Companyaddress;
+                data.Ownername = seller_Register.Ownername;
+                data.Phonenumber = seller_Register.Phonenumber;
+                data.Email = seller_Register.Email;
+                data.Address = seller_Register.Address;
+            }
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(data);
+        }
         [Route("addproduct")]
         [Authorize]
         [HttpPost]

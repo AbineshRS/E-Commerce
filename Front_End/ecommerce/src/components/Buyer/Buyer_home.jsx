@@ -87,27 +87,37 @@ function Buyer_home() {
                 }
             `}</style>
 
+            
+            {/* Search */}
             <div className="row mb-4 justify-content-end">
-                <div className="col-md-6">
+                <div className="col-md-3">
                     <label htmlFor="exampleDataList" className="form-label">Search Product</label>
-                    <input
-                        className="form-control"
-                        list="datalistOptions"
-                        id="exampleDataList"
-                        placeholder="Type to search..."
-                        value={searchTerm}
-                        onChange={(e) => {
-                            setSearchTerm(e.target.value);
-                            setCurrentPage(1);
-                        }}
-                    />
-                    <datalist id="datalistOptions">
-                        {details.slice(-5).map((item, index) => (
-                            <option key={index} value={item.productname} />
-                        ))}
-                    </datalist>
+                    <div className="input-group">
+
+                        <input
+                            className="form-control"
+                            list="datalistOptions"
+                            id="exampleDataList"
+                            placeholder="Type to search..."
+                            aria-describedby="search-icon"
+                            value={searchTerm}
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                        />
+                        <span className="input-group-text" id="search-icon">
+                            <i className="bi bi-search"></i>
+                        </span>
+                        <datalist id="datalistOptions">
+                            {details.slice(-5).map((item, index) => (
+                                <option key={index} value={item.productname} />
+                            ))}
+                        </datalist>
+                    </div>
                 </div>
             </div>
+
 
 
 
