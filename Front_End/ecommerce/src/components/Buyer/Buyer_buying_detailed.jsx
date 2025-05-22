@@ -176,17 +176,17 @@ function Buyer_buying_detailed() {
           </select>
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3" hidden>
           <label>Seller Id</label>
           <input type="text" className="form-control" value={details.userId} disabled />
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3" hidden>
           <label>Product Id</label>
           <input type="text" className="form-control" value={details.id} disabled />
         </div>
 
-        <div className="mb-3">
+        <div className="mb-3" hidden>
           <label>User Id</label>
           <input type="text" className="form-control" value={userDetail.id} disabled />
         </div>

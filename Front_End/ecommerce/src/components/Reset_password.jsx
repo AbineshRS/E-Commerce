@@ -69,8 +69,8 @@ function Reset_password() {
             </div>
 
             <div className="mb-3">
-              <label htmlFor="userId" className="form-label">User ID</label>
-              <input type="text" id="userId" className="form-control" value={userId} disabled onChange={handelchang} />
+              <label htmlFor="userId" className="form-label" hidden>User ID</label>
+              <input type="text" id="userId" className="form-control" value={userId} hidden onChange={handelchang} />
             </div>
 
             <div className="mb-3">

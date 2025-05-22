@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "ECOMMERCE.Controllers.BuyerController",
+    "Method": "buyerbuyedproduct",
+    "RelativePath": "Ecommerce/Buyer/buyerbuyed/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECOMMERCE.Controllers.BuyerController",
     "Method": "Update",
     "RelativePath": "Ecommerce/Buyer/Buyerupdate/{id}",
     "HttpMethod": "PUT",

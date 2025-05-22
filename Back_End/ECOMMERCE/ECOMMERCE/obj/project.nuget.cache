@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "1XF6S1pw1xs=",
+  "dgSpecHash": "Rzo676ZLKVw=",
   "success": true,
   "projectFilePath": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\ECOMMERCE.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abinesh R S\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Abinesh R S\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\Abinesh R S\\.nuget\\packages\\extended.wpf.toolkit\\4.7.25104.5739\\extended.wpf.toolkit.4.7.25104.5739.nupkg.sha512",
     "C:\\Users\\Abinesh R S\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Abinesh R S\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.12\\microsoft.aspnetcore.authentication.jwtbearer.8.0.12.nupkg.sha512",
     "C:\\Users\\Abinesh R S\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

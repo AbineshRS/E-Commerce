@@ -65,13 +65,13 @@ namespace ECOMMERCE.Controllers
                 Password = buyerDetails.Password,
                 Usertype = buyerDetails.Usertype,
                 Active = buyerDetails.Active,
-                Email=buyerDetails.Email,
+                Email = buyerDetails.Email,
             };
 
             _Ecommercecontext.Login.Add(login);
             await _Ecommercecontext.SaveChangesAsync();
 
-            return Ok(new { message = "Buyer registered successfully", buyerId = register.Id });
+            return Ok(new { success=true, message = "Buyer registered successfully", buyerId = register.Id });
         }
         [HttpGet]
         [Route("userdetails/{id}")]
@@ -438,30 +438,46 @@ namespace ECOMMERCE.Controllers
         }
         [HttpPatch]
         [Route("resetpassword/{id}")]
-        public async Task<IActionResult> resetpassword(int id,string email,[FromBody]ChangePassword changePassword)
+        public async Task<IActionResult> resetpassword(int id, string email, [FromBody] ChangePassword changePassword)
         {
-            if (id == null)
-            {
-                return BadRequest("Not found");
-            }
-            var userdeatils = await _Ecommercecontext.Buyer_register.Select(a => a.Email ==email).FirstOrDefaultAsync();
+           
             if (userdeatils == null)
             {
                 return BadRequest("Not found");
             }
-            var logindeatils = await _Ecommercecontext.Login.Where(a => a.UserId == id &&a.Email== email).FirstOrDefaultAsync();
+            var logindeatils = await _Ecommercecontext.Login.Where(a => a.Id == id && a.Email == email).FirstOrDefaultAsync();
             if (logindeatils == null)
             {
                 return BadRequest("not found");
             }
             else
             {
-                logindeatils.Username=changePassword.Username;
-                logindeatils.Password=changePassword.Password;
+                logindeatils.Username = changePassword.Username;
+                logindeatils.Password = changePassword.Password;
             }
             await _Ecommercecontext.SaveChangesAsync();
             return Ok(changePassword);
         }
+        [HttpGet]
+        [Route("buyerbuyed/{id}")]
+        public async Task<IActionResult> buyerbuyedproduct(int id)
+        {
+            if (id == null)
+            {
+                return BadRequest("id not found");
+            }
+            var data = await (from buy in _Ecommercecontext.Buyer_Buyed_Products
+                              join prod in _Ecommercecontext.AddProducts
+                              on buy.ProductId equals prod.Id
+                              where buy.SellerId == id
+                              select prod).Distinct().ToListAsync();
+            if (data == null || data.Count == 0)
+            {
+                return BadRequest("Not found");
+            }
+            return Ok(data);
+        }
+
 
     }
 }

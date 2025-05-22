@@ -8,10 +8,10 @@ function Buyer_nav() {
         sessionStorage.clear();
         navigate('/login');
     }
-    const[details,setdetails]=useState({});
-    useEffect(()=>{
+    const [details, setdetails] = useState({});
+    useEffect(() => {
         load();
-    },[])
+    }, [])
     async function load() {
         const id = sessionStorage.getItem('ID');
         const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/userdetails/${id}`)
@@ -38,11 +38,11 @@ function Buyer_nav() {
                         </li>
 
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Pricing</a>
+                            <Link to="/buyed" className="nav-link active" aria-current="page">Buyed Product</Link>
                         </li>
                         <div className="btn-group me-5">
                             <a className="text-decoration-none dropdown-toggle text-black  me-5 nav-link active" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              {details.firstName+'  '+details.lastName}
+                                {details.firstName + '  ' + details.lastName}
                             </a>
                             <ul className="dropdown-menu">
                                 <li>

@@ -39,13 +39,14 @@ namespace ECOMMERCE.Controllers
                 Address = sellerDetails.Address,
             };
             _Ecommercecontext.seller_Registers.Add(register);
-            await _Ecommercecontext.SaveChangesAsync();
             var existing = await _Ecommercecontext.Login.AnyAsync(a => a.Email == sellerDetails.Email);
             if (existing)
             {
                 return Ok(new { success = false, message = "Email already exists." });
 
             }
+            await _Ecommercecontext.SaveChangesAsync();
+
             var login = new Login
             {
                 UserId = register.Id,
@@ -57,7 +58,7 @@ namespace ECOMMERCE.Controllers
             };
             _Ecommercecontext.Login.Add(login);
             await _Ecommercecontext.SaveChangesAsync();
-            return Ok(sellerDetails);
+            return Ok(new { success = true, message = "Seller registered successfully" });
         }
         [HttpGet]
         [Route("userdeatils/{id}")]
