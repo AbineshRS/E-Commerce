@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import img from '../assets/2853458.jpg';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 
 function Login() {
@@ -59,6 +59,7 @@ function Login() {
                             <h3 className="mb-4 text-center">Login</h3>
                             <input type="text" className="form-control mb-3" name='username' placeholder="Username" value={username} onChange={(e) => setusername(e.target.value)} />
                             <input type="password" className="form-control mb-3" name='password' placeholder="Password" value={password} onChange={(e) => setpassword(e.target.value)} />
+                            <Link to="/Forgotpassword" className='float-end p-3'>Forgot Password?</Link>
                             <button className="btn btn-primary w-100" type='submit'>Login</button>
                         </div>
                     </div>

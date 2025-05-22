@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace ECOMMERCE.Controllers
 {
@@ -39,6 +40,12 @@ namespace ECOMMERCE.Controllers
             };
             _Ecommercecontext.seller_Registers.Add(register);
             await _Ecommercecontext.SaveChangesAsync();
+            var existing = await _Ecommercecontext.Login.AnyAsync(a => a.Email == sellerDetails.Email);
+            if (existing)
+            {
+                return Ok(new { success = false, message = "Email already exists." });
+
+            }
             var login = new Login
             {
                 UserId = register.Id,
@@ -46,6 +53,7 @@ namespace ECOMMERCE.Controllers
                 Password = sellerDetails.Password,
                 Usertype = sellerDetails.Usertype,
                 Active = sellerDetails.Active,
+                Email=sellerDetails.Email
             };
             _Ecommercecontext.Login.Add(login);
             await _Ecommercecontext.SaveChangesAsync();

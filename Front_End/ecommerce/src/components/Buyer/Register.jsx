@@ -4,29 +4,44 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
-    const navigate=useNavigate();
-    const[buyerdetails,setDetails]=useState({
-        FirstName:'',
-        LastName:'',
-        DOB:'',
-        Phonenumber:'',
-        Email:'',
-        Gender:'',
-        Address:'',
-        Username:'',
-        Password:'',
-        Usertype:'Buyer',
-        Active:'Active'
+    const navigate = useNavigate();
+    const [buyerdetails, setDetails] = useState({
+        FirstName: '',
+        LastName: '',
+        DOB: '',
+        Phonenumber: '',
+        Email: '',
+        Gender: '',
+        Address: '',
+        Username: '',
+        Password: '',
+        Usertype: 'Buyer',
+        Active: 'Active'
     });
 
-    const handlechange=(e)=>{
-        setDetails({...buyerdetails,[e.target.name]:e.target.value});
+    const handlechange = (e) => {
+        setDetails({ ...buyerdetails, [e.target.name]: e.target.value });
     };
-    const handlesubmit= async(e)=>{
+    const handlesubmit = async (e) => {
         e.preventDefault();
-        await axios.post(`https://localhost:7135/Ecommerce/Buyer/buyer`,buyerdetails);
-        navigate('/login');
-    }
+
+        try {
+            const response = await axios.post(`https://localhost:7135/Ecommerce/Buyer/buyer`, buyerdetails);
+
+            if (response.data.success) {
+                alert(response.data.message);
+                navigate('/login');
+            } else {
+                alert(response.data.message); // Display the error like "Email already exists."
+                navigate('/Forgotpassword')
+            }
+
+        } catch (error) {
+            console.error("Registration error:", error);
+            alert("Something went wrong. Please try again.");
+        }
+    };
+
 
     return (
         <div className="container mt-5">
@@ -35,7 +50,7 @@ function Register() {
                 <div className="col-lg-6 col-md-12 mb-4">
                     <img src={img} alt="Register Visual" className="img-fluid rounded-2 w-100" />
                 </div>
-                
+
                 {/* Form column */}
                 <div className="col-lg-6 col-md-12">
                     <div className="p-4 shadow-lg rounded-3">
@@ -44,23 +59,23 @@ function Register() {
                             <div className="row g-3">
                                 <div className="col-md-6">
                                     <label className="form-label">First Name</label>
-                                    <input type="text" className="form-control" placeholder="First Name" name='FirstName' required onChange={handlechange}/>
+                                    <input type="text" className="form-control" placeholder="First Name" name='FirstName' required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Last Name</label>
-                                    <input type="text" className="form-control" placeholder="Last Name" name='LastName' required onChange={handlechange}/>
+                                    <input type="text" className="form-control" placeholder="Last Name" name='LastName' required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">DOB</label>
-                                    <input type="date" className="form-control" name='DOB'  required onChange={handlechange}/>
+                                    <input type="date" className="form-control" name='DOB' required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Phone Number</label>
-                                    <input type="number" className="form-control" name='Phonenumber' placeholder="Phone Number" required onChange={handlechange}/>
+                                    <input type="number" className="form-control" name='Phonenumber' placeholder="Phone Number" required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Email</label>
-                                    <input type="email" className="form-control" name='Email' placeholder="Email" required onChange={handlechange}/>
+                                    <input type="email" className="form-control" name='Email' placeholder="Email" required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Gender</label>
@@ -76,11 +91,11 @@ function Register() {
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Username</label>
-                                    <input type="text" className="form-control" placeholder="Username" name='Username' required onChange={handlechange}/>
+                                    <input type="text" className="form-control" placeholder="Username" name='Username' required onChange={handlechange} />
                                 </div>
                                 <div className="col-md-6">
                                     <label className="form-label">Password</label>
-                                    <input type="password" className="form-control" placeholder="Password" name='Password'   required onChange={handlechange}/>
+                                    <input type="password" className="form-control" placeholder="Password" name='Password' required onChange={handlechange} />
                                 </div>
                                 <div className="col-6 d-grid">
                                     <button type="submit" className="btn btn-primary">Submit</button>

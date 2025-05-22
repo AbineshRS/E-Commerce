@@ -11,7 +11,7 @@ function Buyer_nav() {
     const[details,setdetails]=useState({});
     useEffect(()=>{
         load();
-    })
+    },[])
     async function load() {
         const id = sessionStorage.getItem('ID');
         const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/userdetails/${id}`)

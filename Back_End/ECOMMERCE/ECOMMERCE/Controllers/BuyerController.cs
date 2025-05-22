@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Text;
@@ -36,6 +38,11 @@ namespace ECOMMERCE.Controllers
             {
                 return BadRequest("Invalid data.");
             }
+            var emailexists = await _Ecommercecontext.Login.AnyAsync(a => a.Email == buyerDetails.Email);
+            if (emailexists)
+            {
+                return Ok(new { success = false, message = "Email already exists." });
+            }
 
             var register = new Buyer_register
             {
@@ -57,7 +64,8 @@ namespace ECOMMERCE.Controllers
                 Username = buyerDetails.Username,
                 Password = buyerDetails.Password,
                 Usertype = buyerDetails.Usertype,
-                Active = buyerDetails.Active
+                Active = buyerDetails.Active,
+                Email=buyerDetails.Email,
             };
 
             _Ecommercecontext.Login.Add(login);
@@ -82,7 +90,7 @@ namespace ECOMMERCE.Controllers
         }
         [HttpPut]
         [Route("Buyerupdate/{id}")]
-        public async Task<IActionResult> Update(int id,Buyer_register buyer_Register)
+        public async Task<IActionResult> Update(int id, Buyer_register buyer_Register)
         {
             if (id == null)
             {
@@ -151,7 +159,7 @@ namespace ECOMMERCE.Controllers
         [HttpPut]
         [Authorize]
         [Route("update")]
-        public async Task<IActionResult> Update(int id, BuyerDetails buyerDetails)
+        public async Task<IActionResult> Update(int id, [FromBody] BuyerDetails buyerDetails)
         {
             var details = await _Ecommercecontext.Buyer_register.FindAsync(id);
             if (details == null)
@@ -260,6 +268,54 @@ namespace ECOMMERCE.Controllers
                 };
                 _Ecommercecontext.Product_Buyed_Details.Add(data2);
             }
+            MailMessage mail = new MailMessage();
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("smpsample4@gmail.com", "Ecommerce"); // Display name here
+            mail.To.Add(data.Email);
+            mail.Subject = "Purchase Confirmation";
+            mail.IsBodyHtml = true;
+
+            // Load image from local path and add as linked resource
+            string imagePath = @"D:\E-Commerce\Back_End\ECOMMERCE\ECOMMERCE\EmailImage\2741840.jpg";
+            LinkedResource inlineLogo = new LinkedResource(imagePath, MediaTypeNames.Image.Jpeg);
+            inlineLogo.ContentId = "ecommerceLogo"; // Must match the cid in <img>
+
+            // Build the HTML email body
+            StringBuilder emailBody = new StringBuilder();
+
+            emailBody.AppendLine($"<img src='cid:ecommerceLogo' alt='Ecommerce' style='max-width:200px;'><br/>");
+            emailBody.AppendLine($"<h3>Dear {data.Username},</h3>");
+            emailBody.AppendLine("<p>Thank you for your purchase! Here are your product details:</p>");
+            emailBody.AppendLine("<table border='1' cellpadding='5' cellspacing='0' style='border-collapse:collapse;'>");
+            emailBody.AppendLine("<tr><th>Product Name</th><th>Quantity</th><th>Amount</th></tr>");
+
+            foreach (var product in buyer_Buyed_Product.product_Buyed_Details)
+            {
+                emailBody.AppendLine("<tr>");
+                emailBody.AppendLine($"<td>{product.Productname}</td>");
+                emailBody.AppendLine($"<td>{product.Quantity}</td>");
+                emailBody.AppendLine($"<td>{product.Amount:C}</td>");
+                emailBody.AppendLine("</tr>");
+            }
+
+            emailBody.AppendLine("</table>");
+            emailBody.AppendLine("<p>We hope to serve you again soon.</p>");
+            emailBody.AppendLine("<p>Best regards,<br/>E-commerce Team</p>");
+
+            // Attach image to the email body
+            AlternateView avHtml = AlternateView.CreateAlternateViewFromString(emailBody.ToString(), null, MediaTypeNames.Text.Html);
+            avHtml.LinkedResources.Add(inlineLogo);
+            mail.AlternateViews.Add(avHtml);
+
+            // SMTP setup
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential("smpsample4@gmail.com", "yitv fxww unlv klrs");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+
+
             await _Ecommercecontext.SaveChangesAsync();
             return Ok(data);
         }
@@ -297,7 +353,7 @@ namespace ECOMMERCE.Controllers
                               on buy.ProductId equals prod.Id
                               where buy.SellerId == id
                               select prod).Distinct().ToListAsync();
-            if (data == null|| data.Count==0)
+            if (data == null || data.Count == 0)
             {
                 return BadRequest("Not found");
             }
@@ -324,12 +380,88 @@ namespace ECOMMERCE.Controllers
                                          prod.Amount,
                                          prod.Quantity,
                                          prod.Address
-                                     }).Distinct().OrderByDescending(a=>a.Id).ToListAsync();
-            if(userdeatils==null || userdeatils.Count == 0)
+                                     }).Distinct().OrderByDescending(a => a.Id).ToListAsync();
+            if (userdeatils == null || userdeatils.Count == 0)
             {
                 return BadRequest("Not found");
             }
             return Ok(userdeatils);
         }
+        [HttpPost("resetpassword")]
+        public async Task<IActionResult> SendResetLink([FromBody] ResetPasswordRequest request)
+        {
+            var user = await _Ecommercecontext.Login.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
+
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>
+                    {   new Claim("ID", user.Id.ToString()),
+
+                        new Claim(ClaimTypes.Email, user.Email),
+                    };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = credentials
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var jwt = tokenHandler.WriteToken(token);
+
+            MailMessage mail = new MailMessage();
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("smpsample4@gmail.com");
+            mail.To.Add(user.Email);
+            mail.Subject = "Reset Password";
+            mail.Body = $@"
+                        <html>
+                        <body>
+                         <p>Hello Your</p>
+                         <p>You requested a password reset. Please click the link below:</p>
+                         <p><a href='http://localhost:4000/resetpassword?token={jwt}'>Reset Password</a></p>
+                         <p>If you didn't request this, you can safely ignore this email.</p>
+                        </body>
+                        </html>";
+            mail.IsBodyHtml = true;
+
+            smtp.Port = 587;
+            smtp.Credentials = new System.Net.NetworkCredential("smpsample4@gmail.com", "yitv fxww unlv klrs");
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+
+            return Ok("Reset link sent");
+        }
+        [HttpPatch]
+        [Route("resetpassword/{id}")]
+        public async Task<IActionResult> resetpassword(int id,string email,[FromBody]ChangePassword changePassword)
+        {
+            if (id == null)
+            {
+                return BadRequest("Not found");
+            }
+            var userdeatils = await _Ecommercecontext.Buyer_register.Select(a => a.Email ==email).FirstOrDefaultAsync();
+            if (userdeatils == null)
+            {
+                return BadRequest("Not found");
+            }
+            var logindeatils = await _Ecommercecontext.Login.Where(a => a.UserId == id &&a.Email== email).FirstOrDefaultAsync();
+            if (logindeatils == null)
+            {
+                return BadRequest("not found");
+            }
+            else
+            {
+                logindeatils.Username=changePassword.Username;
+                logindeatils.Password=changePassword.Password;
+            }
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(changePassword);
+        }
+
     }
 }

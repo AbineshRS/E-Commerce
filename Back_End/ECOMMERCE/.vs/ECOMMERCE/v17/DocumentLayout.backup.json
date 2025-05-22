@@ -11,16 +11,16 @@
       "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\controllers\\sellercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\models\\buyer_buyed_product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\models\\buyer_buyed_product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\models\\ecommercedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\models\\ecommercedbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -37,10 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\models\\sellerdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\models\\sellerdetails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|d:\\e-commerce\\back_end\\ecommerce\\ecommerce\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6AA82185-FCAB-4F41-8DCE-131F4716559B}|ECOMMERCE\\ECOMMERCE.csproj|solutionrelative:ecommerce\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,23 +46,11 @@
       "DocumentGroups": [
         {
           "DockedHeight": 572,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:378921098:0:{83107a3e-496a-485e-b455-16ddb978e55e}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EcommerceDbContext.cs",
-              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\EcommerceDbContext.cs",
-              "RelativeDocumentMoniker": "ECOMMERCE\\Models\\EcommerceDbContext.cs",
-              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\EcommerceDbContext.cs",
-              "RelativeToolTip": "ECOMMERCE\\Models\\EcommerceDbContext.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAcwA0AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T08:54:26.262Z"
             },
             {
               "$type": "Document",
@@ -76,35 +60,9 @@
               "RelativeDocumentMoniker": "ECOMMERCE\\Controllers\\BuyerController.cs",
               "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Controllers\\BuyerController.cs*",
               "RelativeToolTip": "ECOMMERCE\\Controllers\\BuyerController.cs*",
-              "ViewState": "AgIAADsAAAAAAAAAAAAMwFAAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAALEBAAAAAAAAAAAcwLkBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-08T05:59:06.204Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Buyer_buyed_product.cs",
-              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Buyer_buyed_product.cs",
-              "RelativeDocumentMoniker": "ECOMMERCE\\Models\\Buyer_buyed_product.cs",
-              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Buyer_buyed_product.cs",
-              "RelativeToolTip": "ECOMMERCE\\Models\\Buyer_buyed_product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-14T04:57:53.347Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SellerController.cs",
-              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Controllers\\SellerController.cs",
-              "RelativeDocumentMoniker": "ECOMMERCE\\Controllers\\SellerController.cs",
-              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Controllers\\SellerController.cs",
-              "RelativeToolTip": "ECOMMERCE\\Controllers\\SellerController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEwAAABDAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T08:47:40.002Z",
               "EditorCaption": ""
             },
             {
@@ -121,7 +79,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Program.cs",
               "RelativeDocumentMoniker": "ECOMMERCE\\Program.cs",
@@ -142,6 +100,43 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-14T08:49:42.511Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.cs",
+              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Login.cs",
+              "RelativeDocumentMoniker": "ECOMMERCE\\Models\\Login.cs",
+              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Login.cs",
+              "RelativeToolTip": "ECOMMERCE\\Models\\Login.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T08:56:57.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SellerController.cs",
+              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Controllers\\SellerController.cs",
+              "RelativeDocumentMoniker": "ECOMMERCE\\Controllers\\SellerController.cs",
+              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Controllers\\SellerController.cs",
+              "RelativeToolTip": "ECOMMERCE\\Controllers\\SellerController.cs",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAAAO0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T08:47:40.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EcommerceDbContext.cs",
+              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\EcommerceDbContext.cs",
+              "RelativeDocumentMoniker": "ECOMMERCE\\Models\\EcommerceDbContext.cs",
+              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\EcommerceDbContext.cs",
+              "RelativeToolTip": "ECOMMERCE\\Models\\EcommerceDbContext.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAcwAkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T08:54:26.262Z"
             },
             {
               "$type": "Document",
@@ -166,18 +161,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T08:56:35.207Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Login.cs",
-              "DocumentMoniker": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Login.cs",
-              "RelativeDocumentMoniker": "ECOMMERCE\\Models\\Login.cs",
-              "ToolTip": "D:\\E-Commerce\\Back_End\\ECOMMERCE\\ECOMMERCE\\Models\\Login.cs",
-              "RelativeToolTip": "ECOMMERCE\\Models\\Login.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T08:56:57.234Z"
             }
           ]
         },

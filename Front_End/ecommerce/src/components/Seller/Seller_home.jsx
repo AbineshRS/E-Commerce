@@ -7,7 +7,7 @@ function Seller_home() {
     const navigate=useNavigate();
     useEffect(()=>{
         load();
-    });
+    },[]);
     async function load() {
         const token = sessionStorage.getItem('ID');
         if(!token){

@@ -24,6 +24,8 @@ import Dark from './components/Dark'
 import MainLayout from './components/MainLayout'
 import Update_profile from './components/Seller/Update_profile'
 import Update_profiles from './components/Buyer/Update_profile'
+import Forgot_password from '../src/components/Forgot_password'
+import Reset_password from './components/Reset_password'
 
 function App() {
 
@@ -48,6 +50,11 @@ function App() {
           <Route path='/viewdetailed' element={<><Seller_nav/>,<Seller_View_Detailproduct/></>} />
           <Route path='/Buyerdeatils' element={<><Seller_nav/>,<Seller_view_brougheted_Buyers/></>} />
           <Route path='/detail' element={<><Seller_nav/>,<Seller_view_detailed_buyed_sellers/></>} />
+
+
+
+          <Route path='/Forgotpassword' element={<><Nav/>,<Forgot_password/></>} />
+          <Route path='/resetpassword' element={<><Nav/>,<Reset_password/></>} />
 
           
           <Route path='/location' element={<><Nav/>,<LocationSelector/></>}/>
