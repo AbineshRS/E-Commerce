@@ -271,7 +271,101 @@
         }
       }
     },
-    "/Ecommerce/Buyer/update/{id}": {
+    "/Ecommerce/Buyer/addcart": {
+      "post": {
+        "tags": [
+          "Buyer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Addcart"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Addcart"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Addcart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Ecommerce/Buyer/addedcard/{id}": {
+      "get": {
+        "tags": [
+          "Buyer"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Ecommerce/Buyer/updatecard": {
+      "put": {
+        "tags": [
+          "Buyer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Updateproducts"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Updateproducts"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Updateproducts"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Ecommerce/Buyer/remove{id}": {
       "put": {
         "tags": [
           "Buyer"
@@ -291,17 +385,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddProducts"
+                "$ref": "#/components/schemas/CardDelete"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AddProducts"
+                "$ref": "#/components/schemas/CardDelete"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AddProducts"
+                "$ref": "#/components/schemas/CardDelete"
               }
             }
           }
@@ -835,7 +929,7 @@
   },
   "components": {
     "schemas": {
-      "AddProducts": {
+      "Addcart": {
         "type": "object",
         "properties": {
           "id": {
@@ -846,6 +940,22 @@
             "type": "integer",
             "format": "int32"
           },
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sellerId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
           "productname": {
             "type": "string",
             "nullable": true
@@ -854,11 +964,7 @@
             "type": "string",
             "nullable": true
           },
-          "category": {
-            "type": "string",
-            "nullable": true
-          },
-          "spesification": {
+          "quantity": {
             "type": "string",
             "nullable": true
           },
@@ -866,11 +972,11 @@
             "type": "string",
             "nullable": true
           },
-          "picture": {
+          "address": {
             "type": "string",
             "nullable": true
           },
-          "quantity": {
+          "status": {
             "type": "integer",
             "format": "int32"
           }
@@ -998,6 +1104,16 @@
           "address": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CardDelete": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -1148,6 +1264,28 @@
           "address": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Updateproducts": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

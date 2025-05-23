@@ -9,13 +9,25 @@ function Buyer_nav() {
         navigate('/login');
     }
     const [details, setdetails] = useState({});
+    const [cartCount, setCartCount] = useState(0);
+
     useEffect(() => {
         load();
+        loadCartCount();
     }, [])
     async function load() {
         const id = sessionStorage.getItem('ID');
         const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/userdetails/${id}`)
         setdetails(result.data);
+    }
+    async function loadCartCount() {
+        const id = sessionStorage.getItem('ID');
+        try {
+            const result = await axios.get(`https://localhost:7135/Ecommerce/Buyer/addedcard/${id}`);
+            setCartCount(result.data.length);
+        } catch (error) {
+            console.error("Error fetching cart count:", error);
+        }
     }
     return (
 
@@ -34,8 +46,17 @@ function Buyer_nav() {
                             <Link to='/buyer' className="nav-link active" aria-current="page">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to='/buyer' className="nav-link active" aria-current="page">cart</Link>
+                            <Link to='/addcart' type="button" className="nav-link active position-relative">
+                                Cart
+                                {cartCount > 0 && (
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {cartCount}
+                                        <span className="visually-hidden">items in cart</span>
+                                    </span>
+                                )}
+                            </Link>
                         </li>
+
 
                         <li className="nav-item">
                             <Link to="/buyed" className="nav-link active" aria-current="page">Buyed Product</Link>

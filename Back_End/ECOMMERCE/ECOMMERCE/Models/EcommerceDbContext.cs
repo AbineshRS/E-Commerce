@@ -12,6 +12,7 @@ namespace ECOMMERCE.Models
         public DbSet<AddProducts> AddProducts { get; set;}
         public DbSet<Buyer_buyed_product> Buyer_Buyed_Products { get; set;}
         public DbSet<Product_buyed_details> Product_Buyed_Details { get; set;}
+        public DbSet<Addcart> Addcarts { get; set;}
 
     }
 }

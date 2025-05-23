@@ -71,7 +71,7 @@ namespace ECOMMERCE.Controllers
             _Ecommercecontext.Login.Add(login);
             await _Ecommercecontext.SaveChangesAsync();
 
-            return Ok(new { success=true, message = "Buyer registered successfully", buyerId = register.Id });
+            return Ok(new { success = true, message = "Buyer registered successfully", buyerId = register.Id });
         }
         [HttpGet]
         [Route("userdetails/{id}")]
@@ -319,26 +319,88 @@ namespace ECOMMERCE.Controllers
             await _Ecommercecontext.SaveChangesAsync();
             return Ok(data);
         }
-        [HttpPut]
-        [Route("update/{id}")]
-        public async Task<IActionResult> Updatequnatity(int id, [FromBody] AddProducts addProducts)
+        [HttpPost]
+        [Route("addcart")]
+        public async Task<IActionResult> addcart(Addcart addcart)
+        {
+            if (addcart == null)
+            {
+                return Ok(new { message = "No data found" });
+            }
+            var data = new Addcart
+            {
+                UserId = addcart.UserId,
+                ProductId = addcart.ProductId,
+                SellerId = addcart.SellerId,
+                Username = addcart.Username,
+                Email = addcart.Email,
+                Productname = addcart.Productname,
+                Productdescription = addcart.Productdescription,
+                Quantity = addcart.Quantity,
+                Amount = addcart.Amount,
+                Address = addcart.Address,
+                Status = addcart.Status,
+            };
+            _Ecommercecontext.Addcarts.Add(data);
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("addedcard/{id}")]
+        public async Task<IActionResult> viewcard(int id)
         {
             if (id == null)
             {
-                return BadRequest("not found");
+                return Ok(new { message = "Not found" });
             }
-            var data = await _Ecommercecontext.AddProducts.FindAsync(id);
-            if (data == null)
+            var data = await _Ecommercecontext.Addcarts.Where(a => a.UserId == id && a.Status == 1).ToListAsync();
+            if (data.Count == 0)
             {
-                return NotFound();
+                return Ok(new { Message = "No data found" });
             }
-            else
-            {
-                data.Quantity -= addProducts.Quantity;
-                await _Ecommercecontext.SaveChangesAsync();
-            }
-            return Ok(data.Quantity);
+            return Ok(data);
         }
+        [HttpPut]
+        [Route("updatecard")]
+        public async Task<IActionResult> UpdateQuantitiesAndStatus([FromBody] List<Updateproducts> updates)
+        {
+            if (updates == null || !updates.Any())
+            {
+                return BadRequest("No update data provided.");
+            }
+
+            foreach (var item in updates)
+            {
+                var product = await _Ecommercecontext.AddProducts.FindAsync(item.ProductId);
+                if (product != null)
+                {
+                    product.Quantity -= item.Quantity;
+                }
+
+                var cart = await _Ecommercecontext.Addcarts
+                            .FirstOrDefaultAsync(c => c.ProductId == item.ProductId && c.UserId == item.UserId); if (cart != null)
+                {
+                    cart.Status = item.Status;
+                }
+            }
+
+            await _Ecommercecontext.SaveChangesAsync();
+
+            return Ok("Product quantities and cart statuses updated successfully.");
+        }
+        [HttpPut]
+        [Route("remove{id}")]
+        public async Task<IActionResult> removeaddcared(int id,CardDelete cardDelete)
+        {
+            if (id == null)
+            {
+                return Ok(new { message = "not found" });
+            }
+            var data = await _Ecommercecontext.Addcarts.Where(a => a.Id == id).FirstOrDefaultAsync();
+            cardDelete.Status = data.Status;
+            return Ok(data);
+        }
+
         [HttpGet]
         [Authorize(Roles = "Seller")]
         [Route("product/{id}")]
@@ -440,7 +502,7 @@ namespace ECOMMERCE.Controllers
         [Route("resetpassword/{id}")]
         public async Task<IActionResult> resetpassword(int id, string email, [FromBody] ChangePassword changePassword)
         {
-           
+
             if (userdeatils == null)
             {
                 return BadRequest("Not found");

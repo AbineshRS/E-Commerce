@@ -27,6 +27,7 @@ import Update_profiles from './components/Buyer/Update_profile'
 import Forgot_password from '../src/components/Forgot_password'
 import Reset_password from './components/Reset_password'
 import Buyer_view_buyedetail from './components/Buyer/Buyer_view_buyedetail'
+import Buyer_view_addcard from './components/Buyer/Buyer_view_addcard'
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/profile" element={<><Buyer_nav/>,<Update_profiles/></>}/>
           <Route path="/buyed" element={<><Buyer_nav/>,<Buyer_productslist/></>}/>
           <Route path="/buyed_details" element={<><Buyer_nav/>,<Buyer_view_buyedetail/></>}/>
+          <Route path="/addcart" element={<><Buyer_nav/>,<Buyer_view_addcard/></>}/>
           {/* Sellers */}
           <Route path='/seller_reg' element={<><Nav/>,<Registers/></>}/>
           <Route path='/update' element={<><Seller_nav/>,<Update_profile/></>}/>

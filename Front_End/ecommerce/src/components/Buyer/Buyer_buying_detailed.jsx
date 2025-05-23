@@ -150,78 +150,121 @@ function Buyer_buying_detailed() {
       alert('Purchase failed. Please try again.');
     }
   };
+  const handleaddcard = async (e) => {
+    e.preventDefault();
+
+    if (!details.id || !userDetail.id) {
+      alert("Missing product or user information.");
+      return;
+    }
+
+    const totalAmountCalculated = parseFloat(details.amount) * selectedQuantity;
+
+    const payload = {
+      UserId: userDetail.id,
+      ProductId: details.id,
+      SellerId: details.userId,
+      Username: userDetail.firstName,
+      Email: userDetail.email,
+      Productname: details.productname,
+      Productdescription: details.productdescription,
+      Quantity: selectedQuantity.toString(),
+      Amount: totalAmountCalculated.toString(),
+      Address: userDetail.address,
+      Status:1,
+
+    };
+
+    try {
+      await axios.post(
+        'https://localhost:7135/Ecommerce/Buyer/addcart',
+        payload,
+        { headers: { 'Content-Type': 'application/json' } }
+      );
+      alert(' successful Added');
+      navigate('/buyer'); // or any page you want to redirect to
+    } catch (error) {
+      console.error("Purchase failed:", error.response || error.message);
+      alert('Purchase failed. Please try again.');
+    }
+  };
 
   return (
     <div className="container mt-4">
       <h3>Product Purchase</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label>User Email</label>
-          <input type="text" className="form-control" value={userDetail.email} disabled />
-        </div>
+      <div className="mb-3">
+        <label>User Email</label>
+        <input type="text" className="form-control" value={userDetail.email} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>User Address</label>
-          <input type="text" className="form-control" value={userDetail.address} disabled />
-        </div>
+      <div className="mb-3">
+        <label>User Address</label>
+        <input type="text" className="form-control" value={userDetail.address} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>Select Quantity</label>
-          <select className="form-select" value={selectedQuantity} onChange={handleSelectChange}>
-            {[...Array(Number(details.quantity) || 1)].map((_, i) => (
-              <option key={i + 1} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </select>
-        </div>
+      <div className="mb-3">
+        <label>Select Quantity</label>
+        <select className="form-select" value={selectedQuantity} onChange={handleSelectChange}>
+          {[...Array(Number(details.quantity) || 1)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
+        </select>
+      </div>
 
-        <div className="mb-3" hidden>
-          <label>Seller Id</label>
-          <input type="text" className="form-control" value={details.userId} disabled />
-        </div>
+      <div className="mb-3" hidden>
+        <label>Seller Id</label>
+        <input type="text" className="form-control" value={details.userId} disabled />
+      </div>
 
-        <div className="mb-3" hidden>
-          <label>Product Id</label>
-          <input type="text" className="form-control" value={details.id} disabled />
-        </div>
+      <div className="mb-3" hidden>
+        <label>Product Id</label>
+        <input type="text" className="form-control" value={details.id} disabled />
+      </div>
 
-        <div className="mb-3" hidden>
-          <label>User Id</label>
-          <input type="text" className="form-control" value={userDetail.id} disabled />
-        </div>
+      <div className="mb-3" hidden>
+        <label>User Id</label>
+        <input type="text" className="form-control" value={userDetail.id} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>User Name</label>
-          <input type="text" className="form-control" value={userDetail.firstName} disabled />
-        </div>
+      <div className="mb-3">
+        <label>User Name</label>
+        <input type="text" className="form-control" value={userDetail.firstName} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>Product Name</label>
-          <input type="text" className="form-control" value={details.productname} disabled />
-        </div>
+      <div className="mb-3">
+        <label>Product Name</label>
+        <input type="text" className="form-control" value={details.productname} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>Product Description</label>
-          <input type="text" className="form-control" value={details.productdescription} disabled />
-        </div>
+      <div className="mb-3">
+        <label>Product Description</label>
+        <input type="text" className="form-control" value={details.productdescription} disabled />
+      </div>
 
-        <div className="mb-3">
-          <label>Total Amount</label>
-          <input
-            type="text"
-            className="form-control"
-            value={totalAmount.toLocaleString('en-IN')}
-            disabled
-          />
-        </div>
+      <div className="mb-3">
+        <label>Total Amount</label>
+        <input
+          type="text"
+          className="form-control"
+          value={totalAmount.toLocaleString('en-IN')}
+          disabled
+        />
+      </div>
 
-        <div className="row">
-          <button type="submit" className="btn btn-primary mb-4">
-            Buy
-          </button>
+      <div className="row">
+        <div className="col">
+          <form onSubmit={handleSubmit}>
+            <button type="submit" className="btn btn-primary w-100 mb-4">Buy</button>
+          </form>
         </div>
-      </form>
+        <div className="col">
+          <form onSubmit={handleaddcard}>
+            <button type="submit" className="btn btn-warning w-100 mb-4">Add Cart</button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

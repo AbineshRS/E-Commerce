@@ -35,43 +35,44 @@ function Buyer_view_buyedetail() {
 
     }
     const totalAmount = detail.reduce((sum, item) => sum + parseFloat(item.amount || 0), 0);
-  return (
-    <div><table className="table">
-                <thead>
+    return (
+        <div><table className="table">
+            <thead>
+                <tr>
+                    <th scope="col">Si no</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                {detail.length > 0 ? (
+                    (() => {
+                        let sino = 1;
+                        return detail.map((detail) => (
+                            <tr key={detail.username + detail.email + detail.amount + detail.quantity + detail.address}>
+                                <td>{sino++}</td>
+                                <td>{detail.username}</td>
+                                <td>{detail.email}</td>
+                                <td>{detail.amount}</td>
+                                <td>{detail.quantity}</td>
+                                <td>{detail.address}</td>
+                            </tr>
+                        ));
+                    })()
+                ) : (
                     <tr>
-                        <th scope="col">Si no</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Address</th>
+                        <td colSpan="5" className="text-center">No products found</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {detail.length > 0 ? (
-                        (() => {
-                            let sino = 1;
-                            return detail.map((detail) => (
-                                <tr key={detail.username + detail.email + detail.amount + detail.quantity + detail.address}>
-                                    <td>{sino++}</td>
-                                    <td>{detail.username}</td>
-                                    <td>{detail.email}</td>
-                                    <td>{detail.amount}</td>
-                                    <td>{detail.quantity}</td>
-                                    <td>{detail.address}</td>
-                                </tr>
-                            ));
-                        })()
-                    ) : (
-                        <tr>
-                            <td colSpan="5" className="text-center">No products found</td>
-                        </tr>
-                    )}
-                </tbody>
+                )}
+            </tbody>
 
-            </table>
+        </table>
+
             <p className='text-center fs-3 fw-bolder'>Total: {totalAmount}</p></div>
-  )
+    )
 }
 
 export default Buyer_view_buyedetail
