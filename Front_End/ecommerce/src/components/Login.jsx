@@ -32,17 +32,30 @@ function Login() {
             }
 
             const usertype = decode.usertype;
-            if (usertype == 'Buyer') {
+            const Status = decode.Status;
+            if (usertype == 'Buyer' && Status == 'Active') {
                 toast.success('Login successful');
                 navigate('/buyer');
-            } else if (usertype == 'Seller') {
+            } else if (usertype == 'Buyer' && Status == 'Inactive') {
+                toast.info('Need to contact Admin');
+                setusername('');
+                setpassword('');
+                navigate('/login');
+            }
+            else if (usertype == 'Seller' && Status == 'Active') {
                 toast.success('Login successful');
                 navigate('/seller_home');
-            } else {
+            } else if (usertype == 'Seller' && Status == 'Inactive') {
+                toast.info('Need to contact Admin');
+                setusername('');
+                setpassword('');
+                navigate('/login')
+            }
+            else {
                 navigate('/login');
             }
         } catch (error) {
-            alert('Invalid credentials');
+            toast.error('Invalid credentials');
             console.error(error);
         }
 

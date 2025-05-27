@@ -389,7 +389,7 @@ namespace ECOMMERCE.Controllers
             return Ok("Product quantities and cart statuses updated successfully.");
         }
         [HttpPut]
-        [Route("remove{id}")]
+        [Route("remove/{id}")]
         public async Task<IActionResult> removeaddcared(int id,CardDelete cardDelete)
         {
             if (id == null)
@@ -397,7 +397,8 @@ namespace ECOMMERCE.Controllers
                 return Ok(new { message = "not found" });
             }
             var data = await _Ecommercecontext.Addcarts.Where(a => a.Id == id).FirstOrDefaultAsync();
-            cardDelete.Status = data.Status;
+            data.Status = cardDelete.Status;
+            await _Ecommercecontext.SaveChangesAsync();
             return Ok(data);
         }
 
