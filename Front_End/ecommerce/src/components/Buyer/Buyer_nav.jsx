@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import img from '../../assets/online-shop.png'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
 function Buyer_nav() {
     const navigate = useNavigate();
     const handlelogout = () => {
         sessionStorage.clear();
+        toast.error('Logout');
         navigate('/login');
     }
     const [details, setdetails] = useState({});

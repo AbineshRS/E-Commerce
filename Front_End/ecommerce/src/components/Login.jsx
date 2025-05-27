@@ -3,8 +3,9 @@ import img from '../assets/2853458.jpg';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
-
+import { toast } from 'react-toastify';
 function Login() {
+
     const [username, setusername] = useState('');
     const [password, setpassword] = useState('');
     const navigate = useNavigate();
@@ -31,11 +32,14 @@ function Login() {
             }
 
             const usertype = decode.usertype;
-            alert('success');
             if (usertype == 'Buyer') {
+                toast.success('Login successful');
                 navigate('/buyer');
-            } else {
+            } else if (usertype == 'Seller') {
+                toast.success('Login successful');
                 navigate('/seller_home');
+            } else {
+                navigate('/login');
             }
         } catch (error) {
             alert('Invalid credentials');

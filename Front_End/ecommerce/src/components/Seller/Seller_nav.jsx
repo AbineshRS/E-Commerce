@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import img from '../../assets/online-shop.png'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -11,6 +12,7 @@ function Seller_nav() {
     const navigate = useNavigate();
     const hnadleclick = () => {
         sessionStorage.clear();
+        toast.error('Logout');
         navigate('/login');
     };
     useEffect(() => {

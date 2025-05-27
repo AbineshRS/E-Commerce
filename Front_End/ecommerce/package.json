@@ -13,10 +13,13 @@
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
+    "jquery": "^3.7.1",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router-dom": "^7.5.3"
+    "react-router-dom": "^7.5.3",
+    "react-toastify": "^11.0.5",
+    "toastr": "^2.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
