@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Seller_View_Detailproduct() {
 
@@ -76,7 +77,7 @@ function Seller_View_Detailproduct() {
                 'Authorization': `Bearer ${token}`
             }
         });
-        alert('Updated');
+        toast.warning('Product Updated');
         load();
     };
 

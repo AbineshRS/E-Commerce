@@ -87,7 +87,7 @@ function Buyer_home() {
                 }
             `}</style>
 
-            
+
             {/* Search */}
             <div className="row mb-4 justify-content-end">
                 <div className="col-md-3">
@@ -160,6 +160,9 @@ function Buyer_home() {
                                 <div className="card-body d-flex flex-column shadow">
                                     <h5 className="card-title">{detail.productname}</h5>
                                     <p className="card-text flex-grow-1">{detail.productdescription}</p>
+                                    <p className="card-text flex-grow-1 text-center fw-bolder">
+                                        ₹{parseFloat(detail.amount).toLocaleString('en-IN')}
+                                    </p>
                                     <button className="btn btn-primary mt-auto" onClick={() => handleviewdetails(detail.id)}>View Product</button>
                                 </div>
                             </div>

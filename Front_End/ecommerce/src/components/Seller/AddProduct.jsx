@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import img from '../../assets/10915798.jpg';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function AddProduct() {
     const id = sessionStorage.getItem('ID');
@@ -57,7 +58,7 @@ function AddProduct() {
                     }
                 }
             );
-            alert('Product added successfully');
+            toast.success('Product added successfully');
 
             setProduct({
                 UserId: addProducts.UserId,

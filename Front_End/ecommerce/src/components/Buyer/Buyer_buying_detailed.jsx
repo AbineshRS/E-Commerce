@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Buyer_buying_detailed() {
   const navigate = useNavigate();
@@ -143,7 +144,7 @@ function Buyer_buying_detailed() {
 
       await updateProductQuantity(); // ✅ Update product quantity after purchase
 
-      alert('Purchase successful');
+      toast.success('Purchase successful');
       navigate('/buyer'); // or any page you want to redirect to
     } catch (error) {
       console.error("Purchase failed:", error.response || error.message);
@@ -181,7 +182,7 @@ function Buyer_buying_detailed() {
         payload,
         { headers: { 'Content-Type': 'application/json' } }
       );
-      alert(' successful Added');
+      toast.success('successful Added');
       navigate('/buyer'); // or any page you want to redirect to
     } catch (error) {
       console.error("Purchase failed:", error.response || error.message);

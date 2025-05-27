@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 function Update_profile() {
     const location = useLocation();
@@ -36,7 +37,7 @@ function Update_profile() {
         await axios.put(`https://localhost:7135/Seller/Seller/updateprofile/${id}`, details, {
         headers: { 'Content-Type': 'application/json' }
       });
-        alert('Updated');
+      toast.warning('Profile Updated');
         load();
     }
 
