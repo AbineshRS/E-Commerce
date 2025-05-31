@@ -71,5 +71,22 @@ namespace ECOMMERCE.Controllers
                               }).ToListAsync();
             return Ok(data);
         }
+        [HttpPut]
+        [Route("buyerupdate/{id}")]
+        public async Task<IActionResult> updatebuyer(int id, Status status)
+        {
+            if (id == 0)
+            {
+                return Ok(new { message = "Not found" });
+            }
+            var data = await _Ecommercecontext.Login.Where(a => a.Id == id && a.Usertype == "Buyer").FirstOrDefaultAsync();
+            if (data == null)
+            {
+                return Ok(new { message = "Not found" });
+            }
+            data.Active = status.Active;
+            await _Ecommercecontext.SaveChangesAsync();
+            return Ok(data);
+        }
     }
 }

@@ -139,7 +139,8 @@ namespace ECOMMERCE.Controllers
                         new Claim(ClaimTypes.Name, details.Username),
                         new Claim("ID", details.UserId.ToString()),
                          new Claim(ClaimTypes.Role, details.Usertype),
-                        new Claim("usertype",details.Usertype)
+                        new Claim("usertype",details.Usertype),
+                        new Claim("Status",details.Active)
                     };
 
                 var tokenHandler = new JwtSecurityTokenHandler();
