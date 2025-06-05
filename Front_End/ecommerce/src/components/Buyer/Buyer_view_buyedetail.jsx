@@ -49,25 +49,23 @@ function Buyer_view_buyedetail() {
             </thead>
             <tbody>
                 {detail.length > 0 ? (
-                    (() => {
-                        let sino = 1;
-                        return detail.map((detail) => (
-                            <tr key={detail.username + detail.email + detail.amount + detail.quantity + detail.address}>
-                                <td>{sino++}</td>
-                                <td>{detail.username}</td>
-                                <td>{detail.email}</td>
-                                <td>{detail.amount}</td>
-                                <td>{detail.quantity}</td>
-                                <td>{detail.address}</td>
-                            </tr>
-                        ));
-                    })()
+                    detail.map((item, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{item.username}</td>
+                            <td>{item.email}</td>
+                            <td>{item.amount}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.address}</td>
+                        </tr>
+                    ))
                 ) : (
                     <tr>
-                        <td colSpan="5" className="text-center">No products found</td>
+                        <td colSpan="6" className="text-center">No products found</td>
                     </tr>
                 )}
             </tbody>
+
 
         </table>
 

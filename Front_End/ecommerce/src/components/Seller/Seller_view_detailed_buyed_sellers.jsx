@@ -51,28 +51,26 @@ function Seller_view_detailed_buyed_sellers() {
                 </thead>
                 <tbody>
                     {detail.length > 0 ? (
-                        (() => {
-                            let sino = 1;
-                            return detail.map((detail) => (
-                                <tr key={detail.username + detail.email + detail.amount + detail.quantity + detail.address}>
-                                    <td>{sino++}</td>
-                                    <td>{detail.username}</td>
-                                    <td>{detail.email}</td>
-                                    <td>{detail.amount}</td>
-                                    <td>{detail.quantity}</td>
-                                    <td>{detail.address}</td>
-                                </tr>
-                            ));
-                        })()
+                        detail.map((detail, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{detail.username}</td>
+                                <td>{detail.email}</td>
+                                <td>{detail.amount}</td>
+                                <td>{detail.quantity}</td>
+                                <td>{detail.address}</td>
+                            </tr>
+                        ))
                     ) : (
                         <tr>
-                            <td colSpan="5" className="text-center">No products found</td>
+                            <td colSpan="6" className="text-center">No products found</td>
                         </tr>
                     )}
                 </tbody>
 
+
             </table>
-            <p className='text-center fs-3 fw-bolder'>Total: {totalAmount}</p>
+            <p className='text-center fs-3 fw-bolder'> Total: ₹{totalAmount.toLocaleString('en-IN')}</p>
         </div>
     )
 }

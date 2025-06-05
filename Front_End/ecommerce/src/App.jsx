@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { ToastContainer } from 'react-toastify'
+import { Bounce, Flip, Slide, ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
@@ -44,22 +44,22 @@ function App() {
             <Route path="/" element={<><Nav /><Home /></>} />
             <Route path="/login" element={<><Nav />,<Login /></>} />
             {/* Buyer */}
-            <Route path="/buyer_reg" element={<><Nav />,<Register /></>} />
-            <Route path="/buyer" element={<><Buyer_nav />,<Buyer_home /></>} />
+            <Route path="/buyer_reg" element={<><Nav /><Register /></>} />
+            <Route path="/buyer" element={<><Buyer_nav /><Buyer_home /></>} />
             <Route path="/buyer_buyproduct" element={<><Buyer_nav />,<Buyer_buying_detailed /></>} />
-            <Route path="/profile" element={<><Buyer_nav />,<Update_profiles /></>} />
-            <Route path="/buyed" element={<><Buyer_nav />,<Buyer_productslist /></>} />
+            <Route path="/profile" element={<><Buyer_nav /><Update_profiles /></>} />
+            <Route path="/buyed" element={<><Buyer_nav /><Buyer_productslist /></>} />
             <Route path="/buyed_details" element={<><Buyer_nav />,<Buyer_view_buyedetail /></>} />
-            <Route path="/addcart" element={<><Buyer_nav />,<Buyer_view_addcard /></>} />
+            <Route path="/addcart" element={<><Buyer_nav /><Buyer_view_addcard /></>} />
             {/* Sellers */}
-            <Route path='/seller_reg' element={<><Nav />,<Registers /></>} />
-            <Route path='/update' element={<><Seller_nav />,<Update_profile /></>} />
-            <Route path='/seller_home' element={<><Seller_nav />,<Seller_home /></>} />
-            <Route path='/addproducts' element={<><Seller_nav />,<AddProduct /></>} />
-            <Route path='/view_product' element={<><Seller_nav />,<Seller_viewproduct /></>} />
-            <Route path='/viewdetailed' element={<><Seller_nav />,<Seller_View_Detailproduct /></>} />
-            <Route path='/Buyerdeatils' element={<><Seller_nav />,<Seller_view_brougheted_Buyers /></>} />
-            <Route path='/detail' element={<><Seller_nav />,<Seller_view_detailed_buyed_sellers /></>} />
+            <Route path='/seller_reg' element={<><Nav /><Registers /></>} />
+            <Route path='/update' element={<><Seller_nav /><Update_profile /></>} />
+            <Route path='/seller_home' element={<><Seller_nav /><Seller_home /></>} />
+            <Route path='/addproducts' element={<><Seller_nav /><AddProduct /></>} />
+            <Route path='/view_product' element={<><Seller_nav /><Seller_viewproduct /></>} />
+            <Route path='/viewdetailed' element={<><Seller_nav /><Seller_View_Detailproduct /></>} />
+            <Route path='/Buyerdeatils' element={<><Seller_nav /><Seller_view_brougheted_Buyers /></>} />
+            <Route path='/detail' element={<><Seller_nav /><Seller_view_detailed_buyed_sellers /></>} />
 
 
 
@@ -82,9 +82,10 @@ function App() {
           newestOnTop={false}
           closeOnClick
           rtl={false}
+          transition={Slide}
           pauseOnFocusLoss
           draggable
-          pauseOnHover
+
         />
       </MainLayout>
     </div>

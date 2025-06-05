@@ -195,7 +195,7 @@ namespace ECOMMERCE.Controllers
         [Route("getproduct")]
         public async Task<IActionResult> getdata()
         {
-            var data = await _Ecommercecontext.AddProducts.ToListAsync();
+            var data = await _Ecommercecontext.AddProducts.Where(a=>a.Quantity!=0).ToListAsync();
             return Ok(data);
         }
         [HttpGet]
@@ -379,7 +379,7 @@ namespace ECOMMERCE.Controllers
                 }
 
                 var cart = await _Ecommercecontext.Addcarts
-                            .FirstOrDefaultAsync(c => c.ProductId == item.ProductId && c.UserId == item.UserId); if (cart != null)
+                            .FirstOrDefaultAsync(c => c.ProductId == item.ProductId && c.UserId == item.UserId&& c.Status==1); if (cart != null)
                 {
                     cart.Status = item.Status;
                 }
